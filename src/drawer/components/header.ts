@@ -1,34 +1,42 @@
-import { LitElement, unsafeCSS, html, css } from "lit";
+import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import "./headerHandle";
 
 @customElement("drawer-header")
 export class DrawerHeader extends LitElement {
-  constructor() {
-    super();
-  }
-
-  @property({ type: String })
+  @property({ type: String, attribute: "handle-color" })
   handleColor = "black";
 
-  static styles = css`
-    :host {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      padding: 8px 0;
-      cursor: pointer;
-    }
-  `;
+  constructor() {
+    super();
+    this.handleColor = "black";
+  }
 
-  styles = css`
-    header-handle {
-      background-color: ${unsafeCSS(this.handleColor)};
-    }
-  `;
+  connectedCallback(): void {
+    super.connectedCallback();
+  }
+
+  static get styles() {
+    return css`
+      :host {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 8px 0;
+        cursor: pointer;
+      }
+
+      div {
+        display: flex;
+        height: 4px;
+        width: 36px;
+        border-radius: 9999px;
+        background-color: black;
+      }
+    `;
+  }
 
   render() {
-    return html`<header-handle></header-handle> `;
+    return html`<div></div>`;
   }
 }
 declare global {
